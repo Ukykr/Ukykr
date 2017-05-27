@@ -1,0 +1,17 @@
+base
+slidify
+ggplot2
+shiny
+leaflet
+lattice
+caret
+kernlab
+randomForest
+Cubist
+knitr
+MASS
+foreach
+iterators
+doParallel
+randomGLM
+rsconnect

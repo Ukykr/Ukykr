@@ -1,0 +1,75 @@
+---
+title: "Developing Data Products"
+author: "Ukykr"
+date: '`r format(Sys.time(), "%d %M, %Y")`'
+output:
+  ioslides_presentation:
+    incremental: yes
+    transition: default
+    widescreen: yes
+  slidy_presentation:
+    incremental: yes
+mode: selfcontained
+hitheme: tomorrow
+highlighter : highlight.js
+subtitle: Interactive Model Evaluation
+framework: io2012
+widgets: []
+ 
+--- 
+## The Chatterjee\-Price Attitude Data
+
+
+```{r echo = F, results = 'asis'}
+library(knitr)
+data(attitude)
+```
+
+```{r echo = T, results = 'asis'}
+kable(head(attitude))
+```
+
+
+
+Source:
+
+
+Chatterjee, S. and Price, B. (1977) Regression Analysis by Example. New York: Wiley. (Section 3.7, p.68ff of 2nd ed.(1991).)
+
+
+
+--- 
+
+## 
+```{r echo = F, results = 'asis',fig_width=3,   fig_height= 2}
+library(knitr)
+kable(as.data.frame(summary(lm(rating~complaints,data=attitude))[c(4,8)])[,-3])
+qplot(data=attitude,x=complaints,y=rating)+geom_point()+geom_smooth(method = "lm")
+
+```
+
+---
+
+
+
+## Linear model, residuals plot.
+        
+```{r echo = F, results = 'asis',fig_width=4,   fig_height= 3}
+library(knitr)
+lm0fit<-lm(rating~0+complaints,data=attitude)
+kable(as.data.frame(summary(lm0fit)[c(4,8)])[,-3])
+qplot(predict(lm0fit,attitude),lm0fit$residuals)+geom_smooth(method="loess")
+```
+
+
+---
+
+## Machine learning models.
+
+svmLinear, svmPoly, svmRadial - Support Vector Machines
+
+glm - Generalized Linear Model
+
+rf - Random Forest
+
+cubist - Cubist
